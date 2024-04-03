@@ -24,7 +24,7 @@ class LIFOCache(BaseCaching):
 
         size = len(self.cache_data)
 
-        if  size >= BaseCaching.MAX_ITEMS:
+        if size >= BaseCaching.MAX_ITEMS:
             popped = list(self.cache_data.keys())[-1]
             print(f"DISCARD: {popped}")
             del self.cache_data[popped]
