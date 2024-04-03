@@ -21,11 +21,13 @@ class LIFOCache(BaseCaching):
         """
         if key is None or item is None:
             return
-        self.cache_data[key] = item
 
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            value = self.cache_data.popitem()
-            print(f"DISCARD: {value[0]}")
+        size = len(self.cache_data)
+
+        if key not in self.cache_data and size > BaseCaching.MAX_ITEMS:
+            popped = self.cache_data.popitem()
+            print(f"DISCARD: {popped[0]}")
+        self.cache_data[key] = item
 
     def get(self, key):
         """returns the value in self.cache_data linked to key"""
