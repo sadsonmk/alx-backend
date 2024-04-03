@@ -24,9 +24,10 @@ class LIFOCache(BaseCaching):
 
         size = len(self.cache_data)
 
-        if key not in self.cache_data and size > BaseCaching.MAX_ITEMS:
-            popped = self.cache_data.popitem()
-            print(f"DISCARD: {popped[0]}")
+        if  size >= BaseCaching.MAX_ITEMS:
+            popped = list(self.cache_data.keys())[-1]
+            print(f"DISCARD: {popped}")
+            del self.cache_data[popped]
         self.cache_data[key] = item
 
     def get(self, key):
