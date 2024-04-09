@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """This module creates a flask app"""
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from typing import (
+        Dict, Union
+        )
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -24,13 +27,11 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_user(user_id):
+def get_user(user_id: str) -> Union[Dict[str, Union[str, None]], None]:
     """returns a user dictionary or None if the
         ID cannot be found or if login_as was not passed
     """
-    if not user_id:
-        return None
-    return users.get(user_id)
+    return users.get(int(user_id), 0)
 
 
 @app.before_request
