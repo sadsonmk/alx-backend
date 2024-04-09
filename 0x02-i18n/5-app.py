@@ -27,7 +27,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_user(user_id: str) -> Union[Dict[str, Union[str, None]], None]:
+def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
     """returns a user dictionary or None if the
         ID cannot be found or if login_as was not passed
     """
