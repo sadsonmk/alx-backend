@@ -3,9 +3,6 @@
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
-from typing import (
-        Dict, Union
-        )
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -27,7 +24,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
+def get_user(user_id):
     """returns a user dictionary or None if the
         ID cannot be found or if login_as was not passed
     """
@@ -55,7 +52,7 @@ def get_locale() -> str:
 @app.route('/')
 def home():
     """returns the home page for the app"""
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
