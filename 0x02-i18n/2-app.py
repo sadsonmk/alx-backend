@@ -2,7 +2,7 @@
 """This module creates a flask app"""
 
 from flask import Flask, render_template, request
-from flask_babel import Babel, localeselector
+from flask_babel import Babel, get_locale as babel_get_locale
 
 
 class Config:
@@ -15,12 +15,17 @@ class Config:
 @babel.localeselector
 def get_locale():
     """sets the locale for the app"""
-    return request.accept_languages.match_best(app.config['LANGUAGES'])
+    languages = request.accept_languages.values()
+    locale = babel_get_locale(languages, app.config['LANGUAGES'])
+
+    if locale is None:
+        locale = 'en'
+    return locale
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
-babel = Babel(app, locale_selector=get_locale)
+babel = Babel(app)
 
 
 @app.route('/')
