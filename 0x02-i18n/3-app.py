@@ -2,7 +2,7 @@
 """This module creates a flask app"""
 
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 
 class Config:
@@ -26,8 +26,7 @@ def get_locale() -> str:
 @app.route('/')
 def home():
     """returns the home page for the app"""
-    return render_template('3-index.html', title=gettext('home_title'),
-                           header=gettext('home_header'))
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
