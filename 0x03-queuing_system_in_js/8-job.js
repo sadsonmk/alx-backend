@@ -12,7 +12,7 @@ function createPushNotificationsJobs(jobs, queue) {
         if (!err) {
 	  console.log(`Notification job created: ${job.id}`);
 	} else {
-	  console.log(`Notification job ${job.id} failed: ${err}`);
+	  console.log(`Notification job failed: ${err}`);
 	}
       });
 
